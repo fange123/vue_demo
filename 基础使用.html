@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <h1>{{msg}}</h1>
+  </div>
+  <script src='vue.js'></script>
+  <!-- *引入了vue就相当于全局暴露了一个Vue的全局构造函数，就可以实例化对象 -->
+  <!-- ?由于vm已经由vue处理了，我们需要关注的就是 v:view 和 m:model -->
+
+  <script>
+    const vm = new Vue({
+      //  视图：el, 表示vue可管理的区域
+      el: '#app',
+      // 数据：指定vue中使用的数据
+      data: {
+        msg: 'hello'
+      }
+    });
+
+  </script>
+</body>
+
+</html>

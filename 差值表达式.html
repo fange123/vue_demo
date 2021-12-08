@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<!-- ?差值表达式的使用：用来在页面中展示data里面的数据的 -->
+<!-- ?差值表达式中可以有简单的运算：加减乘除，三木运算... -->
+<!-- ?差值表达式中不可以有js语句，比如if,for等 -->
+<!-- ?差值表达式中不可以作用在属性中 -->
+
+
+<body>
+  <div id='app'>
+    <p>姓名:{{name}}</p>
+    <p>年龄:{{age > 17 ? '大于17':'小于17'}}</p>
+    <!-- !title中不能这么写，属性中可使用：或者v-bind来使用data的数据 -->
+    <p title='{{desc}}'>解释:{{desc.toUpperCase()}}</p>
+    <p :title='desc'>解释:{{desc.toUpperCase()}}</p>
+    <p v-bind:title='desc'>解释:{{desc.toUpperCase()}}</p>
+  </div>
+  <script src='vue.js'></script>
+  <script>
+    const vm = new Vue({
+      el: "#app",
+      data: {
+        name: '章三',
+        age: 17,
+        desc: 'description'
+      }
+    });
+  </script>
+
+</body>
+
+</html>
