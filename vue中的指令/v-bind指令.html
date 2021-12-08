@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<!-- ? v-bind的作用主要是在标签的属性中使用data中的数据 -->
+<!-- ? v-bind可以简写为： -->
+
+
+<body>
+  <div id="app">
+    <img v-bind:src="img1" alt="">
+    <img :src="img1" alt="">
+  </div>
+  <script src='../vue.js'></script>
+  <script>
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        img1: '../images/cat.jpeg'
+
+      }
+    })
+  </script>
+
+</body>
+
+</html>

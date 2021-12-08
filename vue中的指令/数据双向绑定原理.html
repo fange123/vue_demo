@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>数据双向绑定</title>
+</head>
+
+<body>
+  <input type="text" id="input">
+  <p id='p'></p>
+
+  <script>
+    const data = {
+      msg: '哈哈'
+    }
+
+    // 表单变化-----数据变化
+
+    // input事件，实时触发
+    input.addEventListener('input', () => {
+      data.msg = input.value;
+    })
+
+    //数据改表----视图改变
+    //怎么知道数据改变呢？
+    //es5提供了一个方法：object.defineProperty()，可以劫持数据的修改
+    let temp = data.msg;
+    //劫持的对象是data,劫持的属性是msg
+    Object.defineProperty(data, 'msg', {
+      get() {
+        return temp
+      },
+      set(value) {
+        temp = value;
+        //在这里让视图的数据也改变
+        p.innerText = value;
+        input.value = value;
+
+      }
+    })
+
+  </script>
+
+</body>
+
+</html>

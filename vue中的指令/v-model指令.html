@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<!-- ? v-model主要用于表单元素 -->
+<!-- ~因为只有表单元素用户才可以操作，可以改变视图 -->
+<!-- ? v-model主要用于数据双向绑定 -->
+<!-- ~视图变->数据变 -->
+<!-- ~数据变->视图变 -->
+<!-- ?双向绑定的作用：取值啊，不用操作dom就可以得到值 -->
+
+
+
+
+
+<body>
+  <div id="app">
+    <input type="text" v-model="value">
+    <!-- *v-model 会忽略表单元素的默认值 -->
+    <input type="text" v-model="value" value="aaaa">
+    <hr>
+
+    <textarea cols="30" rows="10" v-model="desc"></textarea>
+    <p>{{desc}}</p>
+    <hr>
+    <select v-model='city'>
+      <option value="1">北京</option>
+      <option value="2">上海</option>
+      <option value="3">兰州</option>
+    </select>
+    <p>{{city}}</p>
+    <hr>
+    <input type="checkbox" v-model="isCheck">
+    <p>{{isCheck}}</p>
+  </div>
+  <script src='../vue.js'></script>
+  <script>
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        value: '初始值',
+        desc: '帅',
+        city: 3,
+        isCheck: true
+      }
+    })
+  </script>
+
+</body>
+
+</html>
