@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <button @click='go'>走</button>
+    <button @click='stop'>停</button>
+    <h1>{{msg}}</h1>
+  </div>
+  <script src="../vue.js"></script>
+  <script>
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        msg: '小龙虾30块钱一斤，买一斤送一斤~ '
+      },
+      methods: {
+
+        go() {
+          // clearInterval(this.time)
+
+          //节流
+          if (this.time) return;
+          //开启一个定时器，每次把最前面的字符截取下来放到最后面
+          this.time = setInterval(() => {
+            const first = this.msg[0];
+            this.msg = this.msg.slice(1) + first
+          }, 200)
+        },
+        stop() {
+          //不仅清除定时器，还要吧定时器Id置空，不然下一次定时器不走
+          clearInterval(this.time)
+
+          this.time = null
+        }
+      }
+    })
+  </script>
+
+</body>
+
+</html>
