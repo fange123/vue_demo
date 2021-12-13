@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<!-- * v-text 更新元素的innerText属性，不识别标签 -->
+<!-- * v-html 更新元素的innerHtml属性，识别标签 ,容易产生xss攻击-->
+
+<body>
+  <div id="app">
+    <h1>{{msg}}哈哈哈哈哈</h1>
+    <h1 v-text="msg">啊啊啊啊</h1>
+    <h1 v-html="msg">哈哈哈哈</h1>
+  </div>
+  <script src="../vue.js"></script>
+  <script>
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        msg: "<a href='http://www.baidu.com/'>点我有惊喜</a>"
+      }
+    })
+  </script>
+</body>
+
+</html>

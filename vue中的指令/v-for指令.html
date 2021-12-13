@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<!-- ?v-for 用来遍历数组或者对象 -->
+
+<body>
+  <div id="app">
+    <p>{{msg}}</p>
+    <div>
+      <h1>pp的爱好</h1>
+      <ul>
+        <li v-for='item in hobby' :key='item'>{{item}}</li>
+      </ul>
+      <ul>
+        <li v-for='(item,index) in hobby' :key='index'>{{item}}----{{index}}</li>
+      </ul>
+      <ul>
+        <li v-for='value in friend' :key='index'>{{value}}</li>
+      </ul>
+    </div>
+  </div>
+  <script src="../vue.js"></script>
+  <script>
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        msg: 'hello',
+        hobby: ['唱歌', '跳舞', '篮球', '蹦迪'],
+        friend: {
+          name: '翠花',
+          age: 30,
+          height: 180,
+          weight: 80
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

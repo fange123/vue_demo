@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <!-- * 事件名.事件修饰符或者按键修饰符 -->
+    <input type="text" v-model="msg" @keyup.enter="click">
+    <!-- !直接使用.数字不好，虽然可以用 -->
+    <input type="text" v-model="msg" @keyup.13="click">
+
+    <!-- *vue常用事件名 -->
+    <!-- .enter
+    .tab
+    .delete (捕获“删除”和“退格”键)
+    .esc
+    .space
+    .up
+    .down
+    .left
+    .right -->
+    <!-- *可以通过全局 config.keyCodes 对象自定义按键修饰符别名，但是没啥用 -->
+  </div>
+  <script src="../vue.js"></script>
+  <script>
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        msg: 'hello'
+      },
+      methods: {
+        click() {
+          console.log(this.msg);
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

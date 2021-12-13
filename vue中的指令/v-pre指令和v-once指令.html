@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<!-- ? vue遇到v-pre指令，会跳过对差值表达式的编译 ,就被vue忽略了-->
+<!-- ? vue遇到v-once会编译，但是如果后面数据发生改变，就不会编译了-->
+
+<!-- *啥时候用v-pre   比如，有大篇作文，不需要修改，不需要vue的编译，可以在最外层的div加上v-pre -->
+
+<!-- !最好不要使用v-pre和v-once,除非真的需要做页面的性能优化，否则会产生很多问题 -->
+
+<body>
+  <div id="app">
+    <p>{{msg}}</p>
+    <p v-pre>{{msg}}</p>
+    <p v-once>{{msg}}</p>
+  </div>
+  <script src="../vue.js"></script>
+  <script>
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        msg: 'hello'
+      }
+    })
+  </script>
+</body>
+
+</html>

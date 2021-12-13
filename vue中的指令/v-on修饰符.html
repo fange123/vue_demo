@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<!-- *.stop - 调用 event.stopPropagation()。
+*     .prevent - 调用 event.preventDefault()。a标签的跳转，表单的提交
+*     .capture 捕获阶段调用
+*     .self 点击自己调用，点击子元素不起作用
+*     .once 只执行一次
+-->
+<!-- +还有挺多的 -->
+
+<body>
+  <div id="app">
+    <p>{{msg}}</p>
+    <a href="http://www.google.com" @click="jump">跳转</a>
+    <div @click.capture="click">
+      <!-- *可以连着写. 既可以阻止默认事件，又可以取消冒泡 -->
+      <a href="http://www.google.com" @click.prevent="jump1">跳转</a>
+    </div>
+  </div>
+  <script src="../vue.js"></script>
+  <script>
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        msg: 'hello'
+      },
+      methods: {
+        jump(e) {
+          // TODO:vue中不需要操作dom,所以这种写法不ok
+          e.preventDefault()
+          alert('123')
+        },
+        jump1() {
+          console.log('jump');
+        },
+        click() {
+          console.log('div');
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

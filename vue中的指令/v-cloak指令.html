@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    [v-cloak] {
+      display: none;
+    }
+  </style>
+</head>
+<!-- * v-cloak 为了解决差值表达式闪烁问题-->
+<!-- * 当vue编译结束v-cloak会自动清除-->
+<!-- * v-cloak配合样式使用,没编译完不显示-->
+
+<!-- !真实开发中v-cloak没啥用 ,只有在script中引入vue.js网速慢才会出现上面的问题-->
+<!-- !真实开发中谁会使用script引入vue.js呢-->
+
+
+
+<body>
+  <div id="app">
+    <p v-cloak>{{msg}}</p>
+  </div>
+  <script src="../vue.js"></script>
+  <script>
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        msg: 'hello'
+      }
+    })
+  </script>
+</body>
+
+</html>
