@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .font {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .color {
+      color: aquamarine;
+    }
+
+    .bg {
+      background-color: pink;
+    }
+
+    .mt20 {
+      margin-top: 20px;
+
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <p>{{msg}}</p>
+    <div class="font color bg mt20">哈哈</div>
+    <div :class='obj'>哈哈</div>
+    <!-- * 类名一般不变的就使用字符串写死，需要变化的动态class，可以用对象 -->
+    <div class="font color mt20" :class='{bg:isBg}'>哈哈</div>
+    <!-- *也可以用数组把类组合起来 -->
+    <div :class='arr'>哈哈</div>
+
+    <!-- TODO:行内样式 -->
+
+    <div style='color:red'>哈哈</div>
+    <!-- ?style里面也可以写对象 -->
+    <div :style='{color:style.color}'>哈哈</div>
+  </div>
+
+  <!-- TODO:  v-bind可以操作style和class,默认情况下style和class都是字符串，但是字符串不好操作，v-bind可以通过data的数据控制-->
+  <script src="vue.js"></script>
+  <script>
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        msg: 'hello',
+        obj: {
+          font: true,
+          color: true,
+          bg: true,
+          ['mt20']: true
+        },
+        isBg: false,
+        arr: ['font', 'bg'],
+        style: {
+          color: 'green'
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
