@@ -53,6 +53,7 @@
     //~计算属性的性能非常高，基于缓存实现
     //~计算属性一旦把计算结果结算出来，就会把结果存储起来，不管使用多少次，直接用
     //~计算属性的值只会当它依赖的属性发生改变，计算属性的结果才会变
+    //!计算属性的值是不可以修改的，所以不可以给计算属性设置v-model双向绑定
     computed: {
       activeNum: function () {
         return this.list.filter((item) => !item.flag).length;
@@ -62,6 +63,15 @@
       },
       isShow: function () {
         return this.list.length > 0;
+      },
+      completeCheck: {
+        get() {
+          return this.list.every((item) => item.flag);
+        },
+        set(value) {
+          //使用foreach和map都可以，但是map返回一个新数组，foreach可以直接修改值
+          this.list.forEach((item) => (item.flag = value));
+        },
       },
       // filterTodo: function (type) {
       //   this.type = type;
@@ -81,8 +91,6 @@
       // },
     },
     mounted() {},
-    updated() {
-      console.log(this.selectList);
-    },
+    updated() {},
   });
 })(window);

@@ -17,8 +17,8 @@
 			<input class="new-todo" placeholder="请输入任务" autofocus v-model='task' @keyup.enter='addList'>
 		</header>
 		<section class="main">
-			<input id="toggle-all" class="toggle-all" type="checkbox">
-			<label for="toggle-all">Mark all as complete</label>
+			<input id="toggle-all" class="toggle-all" type="checkbox" v-model='completeCheck'>
+			<label for="toggle-all">完成任务</label>
 			<ul class="todo-list">
 				<!-- *成功-- completed类 -->
 				<!-- *编辑-- editing类 -->
