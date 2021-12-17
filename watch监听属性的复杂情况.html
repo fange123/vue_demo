@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<!-- *监听简单类型就直接在watch里面写要监听的属性的函数 -->
+<!-- *但是要监听复杂类型的时候，要写完整watch的属性，内部的handler方法以及deep属性 -->
+
+<body>
+  <div id="app">
+    <p>{{msg}}</p>
+    <p>{{car.branch +'-----'+car.price}}</p>
+  </div>
+  <script src="vue.js"></script>
+  <script>
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        msg: 'hello',
+        car: {
+          branch: '玛莎拉蒂',
+          price: 200000
+        }
+      },
+      watch: {
+        // 监视car这个对象（引用类型），不是值类型
+        //其实一直监听的都是car的地址，即使car里面的内容变了，但是car的地址没变
+        //如果就需要监听car，car内部的变化，需要监听的完整形态：
+        car: {
+          //handler是默认的，数据变化时执行的函数，依然无法监听复杂（引用） 类型
+          handler(value) {
+            console.log(value);
+
+          },
+          //需要加上deep属性----不仅监听地址的变化，还会监听数据的变化
+          deep: true,
+
+          //立即监听--没啥用(页面一加载就监听)
+          immediate: true,
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

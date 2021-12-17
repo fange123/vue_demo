@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<!-- * vue的监听属性用于监听vue的数据的变化 -->
+<!-- * watch -->
+
+<body>
+  <div id="app">
+    <input type="text" v-model="msg">
+    <p>{{msg}}</p>
+  </div>
+  <script src="vue.js"></script>
+  <script>
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        msg: 'hello'
+      },
+      watch: {
+        //监听msg这个属性，只要它发生了改变，函数内部的代码就会执行
+        //TODO:两个参数：1：新值，2：旧值
+        msg(newValue, oldValue) {
+          console.log(newValue + "--" + oldValue);
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
