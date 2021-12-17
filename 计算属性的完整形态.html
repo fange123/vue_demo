@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <input type="text" placeholder="请输入你的名" v-model='lastName'>+
+    <input type="text" placeholder="请输入你的字" v-model='firstName'>=
+    <input type="text" placeholder="请输入你的名字" v-model='allName'>
+  </div>
+  <script src="vue.js"></script>
+  <script>
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        lastName: '',
+        firstName: ''
+      },
+      // 计算属性的完整形态：如果需要修改计算属性的值，如果需要对计算属性使用v-model双向绑定
+      //还应该提供set方法，set里面的逻辑需要自己提供
+      computed: {
+        allName: {
+          //默认提供的是get方法
+          get() {
+            return this.lastName + ' ' + this.firstName
+          },
+          set(value) {
+            this.lastName = value.split(' ')[0];
+            this.firstName = value.split(' ')[1];
+            console.log(value.split(' ')[0]);
+            console.log(value.split(' ')[1]);
+
+          }
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
