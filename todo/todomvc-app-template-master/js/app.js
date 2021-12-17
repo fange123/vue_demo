@@ -1,26 +1,11 @@
 (function (window) {
+  let list = JSON.parse(localStorage.getItem("list")) || [];
   const vm = new Vue({
     el: ".todoapp",
     data: {
       task: "",
       //任务列表
-      list: [
-        {
-          id: 1,
-          name: "睡觉",
-          flag: false,
-        },
-        {
-          id: 2,
-          name: "吃饭",
-          flag: true,
-        },
-        {
-          id: 3,
-          name: "蹦迪",
-          flag: true,
-        },
-      ],
+      list,
       active: "",
       selectList: [],
       type: "All",
@@ -30,6 +15,10 @@
         this.list = this.list.filter((item) => item.id !== id);
       },
       addList() {
+        if (!this.task.trim()) {
+          alert("任务名不能为空");
+          return;
+        }
         this.list.unshift({
           id: this.list[this.list.length - 1].id + 1,
           name: this.task,
@@ -89,6 +78,17 @@
           default:
             return this.list;
         }
+      },
+    },
+    watch: {
+      //监听list的变化，并且将它的当前值存储在localStorage里面
+      //list是数组，是引用类型，所以要用watch的完整形态：
+      list: {
+        deep: true,
+        handler(value) {
+          //localStorage只能存字符串，复杂类型转成字符串。。
+          localStorage.setItem("list", JSON.stringify(value));
+        },
       },
     },
     mounted() {},
