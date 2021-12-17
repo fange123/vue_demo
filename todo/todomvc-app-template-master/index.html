@@ -24,7 +24,9 @@
 				<!-- *编辑-- editing类 -->
 				<!-- *没完成-- 没有类 -->
 
-				<li v-for='item in list' :key="item.id" :class='{completed:item.flag,editing:active}'>
+				<!-- ?把list换成currenList -->
+				<!-- ? list变了currentList自然也会变，currentList就是根据计算属性计算出来的 -->
+				<li v-for='item in currentList' :key="item.id" :class='{completed:item.flag,editing:active}'>
 					<div class="view">
 						<input class="toggle" type="checkbox" v-model='item.flag'>
 						<label @dblclick.stop='editList(item.id)'>{{item.name}}</label>
@@ -40,13 +42,13 @@
 			<span class="todo-count">剩余<strong>{{activeNum}}</strong> 条未完成任务</span>
 			<!-- Remove this if you don't implement routing -->
 			<ul class="filters">
-				<li @click="filterTodo('All')">
+				<li @click.prevent="filterTodo('All')">
 					<a :class="{selected:type==='All'}" href="#/">All</a>
 				</li>
-				<li @click="filterTodo('Active')">
+				<li @click.prevent="filterTodo('Active')">
 					<a href="#/active" :class="{selected:type==='Active'}">Active</a>
 				</li>
-				<li @click="filterTodo('Completed')">
+				<li @click.prevent="filterTodo('Completed')">
 					<a href="#/completed" :class="{selected:type==='Completed'}">Completed</a>
 				</li>
 			</ul>

@@ -46,6 +46,11 @@
       clearList() {
         this.list = this.list.filter((item) => !item.flag);
       },
+      filterTodo: function (type) {
+        this.type = type;
+        //*点击类别切换，list是无论如何都不可以变得
+        //*使用计算属性
+      },
     },
     //?指定计算属性
     //?计算属性和data一样，也能提供给属性的，但是和data不一样，computed 里面的值必须经过计算得到的结果
@@ -73,22 +78,18 @@
           this.list.forEach((item) => (item.flag = value));
         },
       },
-      // filterTodo: function (type) {
-      //   this.type = type;
-      //   switch (type) {
-      //     case "All":
-      //       this.list = this.list;
-      //       break;
-      //     case "Active":
-      //       this.list = this.list.filter((item) => item.flag !== true);
-      //       break;
-      //     case "Completed":
-      //       this.list = this.list.filter((item) => item.flag === true);
-      //       break;
-      //     default:
-      //       break;
-      //   }
-      // },
+      currentList: function () {
+        switch (this.type) {
+          case "Active":
+            // return this.list.filter((item) => item.flag !== true);
+            return this.list.filter((item) => !item.flag);
+          case "Completed":
+            return this.list.filter((item) => item.flag);
+          // return this.list.filter((item) => item.flag === true);
+          default:
+            return this.list;
+        }
+      },
     },
     mounted() {},
     updated() {},
