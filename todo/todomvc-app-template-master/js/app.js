@@ -94,4 +94,5 @@
     mounted() {},
     updated() {},
   });
+  window.vm = vm;
 })(window);

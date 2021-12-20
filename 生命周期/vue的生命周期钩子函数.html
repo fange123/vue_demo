@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<!-- TODO:vue的钩子函数有 11 个 -->
+
+<!-- *掌握 8 个重要的钩子函数就行 -->
+<!-- *分成4组
+      * beforeXXX  XXXed
+-->
+<!-- ?主要用到的就是created和mounted -->
+
+<body>
+  <div id="app">
+    <p>{{msg}}</p>
+  </div>
+  <script src="vue.js"></script>
+  <script>
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        msg: 'hello'
+      },
+      beforeCreate() {
+        console.log('beforeCreate', '会在vue实例数据初始化之前执行');
+        console.error(this.msg);
+      },
+      //TODO:重要，适合发请求（ajax请求越早发越好，数据来的就越早），mounted里面发请求也可以，不过推荐早点搞完
+      created() {
+        console.log('created', '会在vue实例数据初始化之后执行');
+        console.log(this.msg);
+      },
+      beforeMount() {
+        console.log('beforeMount', '在渲染的结构替换el之前');
+        console.log(app.innerHTML);//<p>{{msg}}</p>
+      },
+      //TODO:可以执行一些dom操作
+      mounted() {
+        console.log('mounted', '在渲染的结构替换el之后');
+        console.log(app.innerHTML);//<p>hello</p>
+      },
+      beforeUpdate() {
+        console.log('beforeUpdate', '数据发生了改变，dom更新之前');
+      },
+      //TODO:重要：
+      updated() {
+        console.log('updated', '数据发生了改变，并且dom更新以后');
+      },
+      beforeDestroy() {
+        console.log('beforeDestroy', '销毁前执行');
+      },
+      //TODO:有用，释放资源：比如销毁定时器
+      destroyed() {
+        console.log('destroyed', '销毁后执行');
+      }
+    })
+  </script>
+</body>
+
+</html>

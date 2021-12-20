@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<!-- *一个事件，从出生到消亡的整个阶段 -->
+<!-- *vue的生命周期：一个vue实例从new Vue()开始创建，到最终这个vue实例被销毁的整个过程
+* 就是vue的生命周期
+
+* 生命周期函数（钩子函数） 如果我们希望参与到vue的生命周期，就需要使用vue的钩子函数-->
+<!-- ~初始化阶段
+  ~ 1.new Vue()初始化vue实例
+  ~ 2.初始化内部的一些事件，生命周期开始
+  ~ 3.初始化vue内部的数据，把data中所有的数据都劫持给vm，这一步开始，vm上就有数据了
+  ~ 4.判断是否有el:1，直接指定el参数，2，vm.$mount('#app')
+  ~ 5.确定是否有模版template：1，如果有template,那么template就是模版，2，如果没有template，el本身就是模版，el不能是body,html
+  ~ 5.结合数据和模版，动态渲染结构，把原来的el替换掉
+-->
+<!-- ~数据更新阶段
+  ~1.等待数据发生变化
+  ~2.视图自动更新数据发生改变的那部分
+-->
+<!-- ~销毁阶段
+  ~1.等待调用vm.$destroy()方法
+  ~2.调用了就卸载vue内部的一些事件和监听等等，之后，vue的数据发生变化，页面不再更新
+-->
+
+<body>
+  <div id="app">
+    <p>{{msg}}</p>
+  </div>
+  <script src="vue.js"></script>
+  <script>
+    const vm = new Vue({
+      //TODO:设置el有两种方式：
+      //1,提供el参数
+      //2，调用vm.$mount()方法
+      // el: '#app',
+      data: {
+        msg: 'hello'
+      },
+      //TODO:template的优先级高
+      //如果指定了template属性，模版就是template的值，el里面的内容不会展示
+      template: `<a href='#'>{{msg}}</a>`,
+    })
+    vm.$mount('#app')
+  </script>
+</body>
+
+</html>
