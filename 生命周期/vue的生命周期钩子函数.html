@@ -30,7 +30,7 @@
         console.log('beforeCreate', '会在vue实例数据初始化之前执行');
         console.error(this.msg);
       },
-      //TODO:重要，适合发请求（ajax请求越早发越好，数据来的就越早），mounted里面发请求也可以，不过推荐早点搞完
+      //!:重要，适合发请求（ajax请求越早发越好，数据来的就越早），mounted里面发请求也可以，不过推荐早点搞完
       created() {
         console.log('created', '会在vue实例数据初始化之后执行');
         console.log(this.msg);
@@ -39,7 +39,7 @@
         console.log('beforeMount', '在渲染的结构替换el之前');
         console.log(app.innerHTML);//<p>{{msg}}</p>
       },
-      //TODO:可以执行一些dom操作
+      //!:可以执行一些dom操作
       mounted() {
         console.log('mounted', '在渲染的结构替换el之后');
         console.log(app.innerHTML);//<p>hello</p>
@@ -47,7 +47,7 @@
       beforeUpdate() {
         console.log('beforeUpdate', '数据发生了改变，dom更新之前');
       },
-      //TODO:重要：
+      //!:重要：
       updated() {
         console.log('updated', '数据发生了改变，并且dom更新以后');
       },

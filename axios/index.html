@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <p>{{msg}}</p>
+  </div>
+  <script src="../vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+    axios({
+      // method: 'GET',//!:请求方式
+      // url: 'http://localhost/',//!:请求路径
+      // data: {},//!:put或者post请求参数，请求体里面
+      // params: {},//!:get或者delete请求参数，url后面
+      method: 'get',
+      url: 'http://localhost:3000/todos'
+    }).then(res => console.log(res))//!:res是服务器返回的对象，需要的是res里面的data
+      .catch(error => console.log(error))//!:失败内容从catch里面拿
+
+
+    // axios({
+    //   method: 'post',
+    //   url: 'http://localhost:3000/todos',
+    //   data: {
+    //     name: '打游戏',
+    //     flag: false
+    //   }
+    // }).then(res => console.log(res.data))
+
+    axios({
+      method: 'delete',
+      url: 'http://localhost:3000/todos/4',
+
+    }).then(res => console.log(res.data))
+  </script>
+  <script>
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        msg: 'hello'
+      }
+    })
+  </script>
+</body>
+
+</html>
