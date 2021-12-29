@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<!-- *过滤器的语法中有全局过滤器和局部过滤器 -->
+<!-- *全局过滤器：所有vue实例中都能使用-->
+<!-- *局部过滤器 ：只有当前实例中能使用-->
+
+<body>
+  <div id="app">
+    <!-- *过滤器可以串联，意思是先用global对msg过滤，假设过滤完的值是value,然后用demo这个过滤器对value进行过滤 -->
+    <p>{{msg | global | demo}}</p>
+  </div>
+
+  <div id="app2">
+    <!-- *该实例中不能使用demo这个局部过滤器 -->
+    <p>{{msg | global | demo}}</p>
+  </div>
+
+  <script src="../vue.js"></script>
+  <script>
+    Vue.filter('global', function (value) {
+      return value + '😄'
+    })
+
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        msg: 'hello'
+      },
+      //!:局部过滤器
+      filters: {
+        demo: function (value) {
+          return value + '------'
+        }
+
+      }
+    })
+    const vm2 = new Vue({
+      el: '#app2',
+      data: {
+        msg: 'hello'
+      },
+
+    })
+  </script>
+</body>
+
+</html>

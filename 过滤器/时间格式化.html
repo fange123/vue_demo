@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<!-- * 如果后端给的时间是时间戳，前端需要展示 -->
+
+<body>
+  <div id="app">
+
+    <h1>过滤器基本用法</h1>
+    <p>{{date | timeFilter}}</p>
+    <p>{{date2 | timeFilter}}</p>
+    <p>{{date3 | timeFilter}}</p>
+    <hr>
+
+    <h1>过滤器高级用法</h1>
+
+
+    <p>{{date | timeFilter('year')}}</p>
+    <p>{{date2 | timeFilter('month')}}</p>
+    <p>{{date3 | timeFilter('day')}}</p>
+
+  </div>
+  <script src="../vue.js"></script>
+  <script src="../moment.min.js"></script>
+  <script>
+
+    Vue.filter('timeFilter', function (value, type) {
+      if (!type) {
+        // moment()代表当前时间，可以传参数，可以传多个参数
+        return moment(value).format('YYYY-MM-DD HH:mm:ss')
+
+      }
+      switch (type) {
+        case 'year':
+
+          return moment(value).format('YYYY年 HH:mm:ss')
+        case 'month':
+
+          return moment(value).format('MM月 HH:mm:ss')
+        case 'day':
+
+          return moment(value).format('DD日 HH:mm:ss')
+
+        default:
+          break;
+      }
+
+    })
+
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        date: 1767800988788,
+        date2: 788228992882,
+        date3: new Date()
+      }
+    })
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<!-- *过滤器：用来格式化文本的 -->
+<!-- ?过滤器的基本使用 -->
+<!-- ? 1，定义过滤器-->
+<!-- ? 2，使用过滤器   {{值 | 过滤器的名字}}-->
+
+<body>
+  <div id="app">
+    <p>{{msg | demo}}</p>
+    <h3>{{content | demo}}</h3>
+  </div>
+  <script src="../vue.js"></script>
+  <script>
+    // !:定义vue的过滤器
+    // !: 参数1 : 过滤器的名字
+    // !:参数2 : 函数，处理过滤的逻辑，value就是要处理的数据
+    // !:返回值，代表处理后的内容
+
+    Vue.filter('demo', function (value) {
+      return value.toUpperCase() + '1111'
+      console.log(value)
+      console.log('过滤器执行')
+    })
+
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        msg: 'hello',
+        content: 'what is your name?'
+      }
+    })
+  </script>
+</body>
+
+</html>
