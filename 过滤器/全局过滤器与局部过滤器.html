@@ -20,6 +20,8 @@
   <div id="app2">
     <!-- *该实例中不能使用demo这个局部过滤器 -->
     <p>{{msg | global | demo}}</p>
+    <!-- ~v-bind中使用过滤器 -->
+    <p :title="msg | global">哈哈哈哈哈</p>
   </div>
 
   <script src="../vue.js"></script>
