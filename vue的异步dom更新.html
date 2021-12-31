@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<!-- * vue会在数据发生变化的时候，视图会自动跟着变（dom会自动更新）,这个过程是异步的 -->
+<!-- * 所以，在数据改变后，不能立即获取更新后的dom结构-->
+
+<body>
+  <div id="app">
+    <p>{{msg}}</p>
+    <button @click='fn'>点击</button>
+  </div>
+  <script src="vue.js"></script>
+  <script>
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        msg: 'hello'
+      },
+      methods: {
+        fn() {
+          //在改变dom前打印
+          console.log(document.querySelector('p').innerHTML)//hello
+          this.msg = 'hhh';//异步
+          console.log(document.querySelector('p').innerHTML)//hello
+          //如果想在dom更新完拿更新后的dom结构，也可以写个延迟函数setTimeout(),但是时间不好掌握，不推荐这样
+
+          //!:Vue.nextTick()方法会在dom更新完的第一时间立即去执行
+          // Vue.nextTick(function () {
+          //   console.log(document.querySelector('p').innerHTML)//hhh
+          // })
+
+          //还有另外一种写法：this.$nextTick(function(){}),推荐用这种，this就是当前实例
+          this.$nextTick(function () {
+            console.log(document.querySelector('p').innerHTML)//hhh
+          })
+
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
