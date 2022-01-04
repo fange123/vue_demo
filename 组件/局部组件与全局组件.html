@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<!-- * 全局组件：所有的vue实例中都能使用 -->
+<!-- * 局部组件：只有在当前实例中使用 -->
+
+<body>
+  <div id="app">
+    <p>{{msg}}</p>
+    <hello></hello>
+    <demo></demo>
+    <hello1></hello1>
+    <demo1></demo1>
+  </div>
+  <script src="vue.js"></script>
+  <script>
+
+    // 全局组件
+
+    Vue.component('hello', {
+      template: "<div>hello</div>",
+    })
+
+    Vue.component('demo', {
+      template: "<div>demo</div>",
+    })
+
+
+
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        msg: 'hello'
+      },
+      //局部组件
+      components: {
+        hello1: {
+          template: "<div>hello1</div>"
+        },
+        demo1: {
+          template: "<div>demo1</div>"
+        }
+
+      }
+    })
+  </script>
+</body>
+
+</html>

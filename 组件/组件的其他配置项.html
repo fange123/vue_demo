@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <p>{{msg}}</p>
+    <hello></hello>
+    <hello></hello>
+    <hello></hello>
+  </div>
+  <script src="vue.js"></script>
+  <script>
+
+    //!:  组件就和vue实例一样，配置项都写在里面
+    Vue.component('hello', {
+      template: `
+        <div>
+          <p>{{money}}</p>
+          <button @click='fn'>点击</button>
+        </div>
+      `,
+      methods: {
+        fn() {
+          this.money += 10
+        }
+      },
+
+      //!: data里面不能直接写对象，必须写一个函数返回值的方式
+      data: function () {
+        return {
+          money: 100
+        }
+      }
+    })
+
+    // TODO:组件和vue实例不一样的几点：
+    //1，vue实例要有el参数
+    //2，组件要提供template参数
+    //3，组件中的data必须是一个函数，函数内部需要返回一个对象------给每个组件都维护一份独立的数据
+
+    //组件会复用，如果data是对象，那么data里的数据就类似全局变量，组件复用使用同一份数据会出问题的
+
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        msg: 'hello'
+      },
+
+    })
+  </script>
+</body>
+
+</html>
