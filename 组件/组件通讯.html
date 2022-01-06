@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    .son {
+      background-color: pink
+    }
+  </style>
+</head>
+
+<!-- * 每个组件都有自己的数据，提供在data中，每个data还是个函数，保证复用时数据是唯一的 -->
+<!-- * 组件通讯：1，父传子 2，子传父 3，非父子 -->
+
+<body>
+  <div id="app">
+    <p>{{msg}}</p>
+    <!-- * 子组件向父组件传函参数的时候，父组件的函数不能用驼峰这样的大写形式,全部小写或者加横线 -->
+    <!-- * 传属性v-bind,传函数v-on -->
+    <son :msg='msg' :name='name' @handle-click='handleClick'></son>
+  </div>
+  <script src="vue.js"></script>
+  <script>
+    // !: 父子关系
+
+    //!: 在子组件中使用父组件的数据
+
+    //TODO:父组件给子组件传值
+    //1.子组件通过props属性获取到父组件传过来的数据
+    //1.父组件给子组件添加属性，自定义属性
+    Vue.component('son', {
+      template: `<div class='son' @click="handleClickSon">{{msg}}-----{{money}}----{{name}}</div>`,
+      // props: ['msg', 'name', 'handleClick'],//父组件传来的数据
+      props: {
+        msg: String,
+        name: String,
+      },//父组件传来的数据
+      data: function () {//自己的数据
+        return {
+          money: 100
+        }
+      },
+      methods: {
+        handleClickSon() {
+          this.$emit('handle-click', 'hhh')
+
+        }
+      }
+    })
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        msg: 'hello',
+        name: '爸爸'
+      },
+      methods: {
+        handleClick(name) {
+          alert(name)
+
+        }
+      }
+    })
+
+    window.vm = vm
+  </script>
+</body>
+
+</html>

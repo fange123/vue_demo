@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<!-- *  props和data的区别 -->
+<!-- *  组件中的数据，可以是data中的，也可以是props中的-->
+<!-- *  data中的数据是可以修改的，props中的数据不可以修改 (复杂类型里面的内容可以修改)  --单项数据流（组件间的通信）-->
+
+<body>
+  <div id="app">
+    <p>{{msg}}</p>
+    <son :msg="msg" :obj='obj'></son>
+  </div>
+  <script src="vue.js"></script>
+  <script>
+
+    Vue.component('son', {
+      template: `
+      <div>
+        {{name}}
+        <p @click='fn'>{{obj.firstName}}</p>
+        </div>
+      `,
+      //data表示子组件的私有数据
+      data: function () {
+        return {
+          name: '章三'
+        }
+      },
+
+      //props表示父组件传递给子组件的数据
+      props: ['msg', 'obj'],
+      methods: {
+        fn() {
+          this.msg = 'hhh'//修改父组件传过来的值  !: 报错
+          this.obj.firstName = '哈哈哈哈哈哈'//修改父组件传过来的对象里面的属性值，可以
+
+        }
+      }
+
+    })
+
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        msg: 'hello',
+        obj: {
+          firstName: '张三',
+          age: 18
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
