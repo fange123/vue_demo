@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .jack {
+      width: 300px;
+      height: 300px;
+      background-color: pink;
+      margin-bottom: 20px;
+
+    }
+
+    .rose {
+      width: 300px;
+      height: 300px;
+      background-color: pink
+    }
+  </style>
+</head>
+<!--
+  <!-- * 非父子组件通讯 -->
+<!-- * 1.创建一个bus(事件总线)  -- 所有组件都能访问-->
+<!-- * 2.jack去触发bus的自定义事件-->
+<!-- * 3.rose给bus去注册一个自定义事件，提供一个函数，这个函数可以通过参数获取到值-->
+
+<!-- * bus其实就是一个空的vue实例->
+ -->
+
+
+<body>
+  <div id="app">
+    <p>{{msg}}</p>
+    <jack></jack>
+    <rose></rose>
+  </div>
+  <script src="vue.js"></script>
+  <script>
+    // !: 1,创建一个bus
+    const bus = new Vue()
+
+    Vue.component('jack', {
+      template: `
+        <div class="jack" @click='say'>
+          jack
+          <button>jack对rose说</button>
+          <hr/>
+          {{reply}}
+          </div>
+      `,
+      data() { return { world: 'i love you', reply: '' } },
+      methods: {
+        say() {
+          // !: 2，触发bus事件,并传参数
+          bus.$emit('sb', this.world)
+
+        }
+      },
+      created() {
+        bus.$on('reply', reply => this.reply = reply)
+      }
+    })
+
+    Vue.component('rose', {
+      template: `
+        <div class="rose">
+          rose
+          {{msg}}
+          <hr/>
+          <button @click='replyF'>rose回答说</button>
+          </div>
+      `,
+      data() {
+        return {
+          msg: "",
+          reply: 'jack～～～'
+        }
+      },
+      methods: {
+        replyF() {
+          bus.$emit('reply', this.reply)
+        }
+      },
+
+      //!: 3,rose给bus注册事件，越早越好
+      created() {
+        bus.$on('sb', (msg) => { this.msg = msg })
+      }
+    })
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        msg: 'hello'
+      }
+    })
+  </script>
+</body>
+
+</html>

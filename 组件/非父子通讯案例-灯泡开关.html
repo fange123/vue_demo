@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .container {
+      width: 500px;
+      height: 500px;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    .lamb {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      background: black;
+      color: #fff
+    }
+
+    .on {
+      background: yellow;
+      box-shadow: 0 0 20px 10px rgb(255, 255, 0, .8);
+      color: black;
+    }
+
+
+
+    .desk {
+      margin-top: 20px;
+      width: 300px;
+      height: 80px;
+      background: black;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    .turn {
+      width: 100px;
+      height: 50px;
+      display: flex;
+      background-color: #ccc;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <div class="container">
+      <lamb></lamb>
+      <desk></desk>
+    </div>
+
+  </div>
+  <script src="vue.js"></script>
+  <script>
+    //!: 1，创建一个事件总线
+    const bus = new Vue()
+
+    Vue.component('lamb', {
+      template: `<div class="lamb" :class="{on:status}">我是一盏灯</div>`,
+      data() {
+        return {
+          status: false
+        }
+      },
+      created() {
+        //!: 3,bus注册一个turn事件,接受传过来的参数
+        bus.$on('turn', status => this.status = status)
+      }
+    })
+
+    Vue.component('desk', {
+      template: `<div class="desk">
+                    <div class="turn" @click="fn(true)">开灯</div>
+                    <div class="turn" @click="fn(false)">关灯</div>
+                </div>`,
+
+      methods: {
+        fn(status) {
+          //!: 2,触发bus的事件turn,并且传参
+          bus.$emit('turn', status)
+
+        }
+      }
+    })
+    const vm = new Vue({
+      el: '#app',
+      data: {
+
+      }
+    })
+  </script>
+</body>
+
+</html>
