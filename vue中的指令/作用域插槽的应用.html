@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <my-table :list='list'>
+      <template v-slot:delete='scope'>
+        <!-- * 删除的时候就需要拿到该条数据的id,,就需要插槽传过来 -->
+        <a href="#" @click='deleteList(scope.id)'>删除</a>
+      </template>
+    </my-table>
+
+  </div>
+  <script src="../vue.js"></script>
+  <script>
+
+    Vue.component('my-table', {
+      template: `
+        <table>
+          <tr v-for='item in list' :key="item.id">
+            <td>{{item.id}}</td>
+            <td>{{item.name}}</td>
+            <td>{{item.sex}}</td>
+            <td><slot name='delete' :id='item.id'></slot</td>
+          </tr>
+       </table>
+      `,
+      props: ['list']
+    })
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        msg: 'hello',
+        list: [
+          {
+            id: 1,
+            name: '章三',
+            sex: '男'
+          },
+          {
+            id: 2,
+            name: '马冬梅',
+            sex: '女'
+          },
+          {
+            id: 3,
+            name: '张大宝',
+            sex: '女'
+          },
+        ]
+      },
+      methods: {
+        deleteList(id) {
+          this.list = this.list.filter(l => l.id !== id)
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

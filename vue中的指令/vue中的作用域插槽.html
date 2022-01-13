@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .modal {
+      width: 300px;
+      padding: 0 10px 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin-bottom: 20px;
+    }
+
+    h3 {
+      margin: 10px 0
+    }
+
+    footer {
+      margin-top: 10px;
+      text-align: right
+    }
+  </style>
+</head>
+
+<!-- * 作用域插槽：带有数据的插槽  <slot name='title' money='100' car='小黄车'></slot> -->
+<!-- * 作用域插槽就是为了能够获取到插槽上的数据 -->
+
+<body>
+  <div id="app">
+    <modal>
+      <template v-slot:title>
+        <h3>温馨提示</h3>
+      </template>
+      <template v-slot:content>
+        <p>确定删除吗？</p>
+      </template>
+
+      <!-- * scope:作用域  传过来的数据用scope接受 -->
+      <template v-slot:btn1='scope'>
+        <a href="#">{{scope.value}}</a>
+      </template>
+
+      <template v-slot:btn2='scope'>
+        <button>{{scope.value}}</button>
+      </template>
+
+    </modal>
+
+    <modal>
+      <template v-slot:title>
+        我是标题
+      </template>
+      <template v-slot:content>
+        <input type="text">
+      </template>
+
+      <template v-slot:btn1='scope'>
+        <i>{{scope.value}}</i>
+      </template>
+
+      <template v-slot:btn2='scope'>
+        <span>{{scope.value}}</span>
+      </template>
+
+    </modal>
+  </div>
+  <script src="../vue.js"></script>
+  <script>
+    Vue.component('modal', {
+      template: `
+        <div class="modal">
+          <header class='header'>
+            <slot name='title'></slot>
+          </header>
+          <div class="modal-content">
+            <slot name='content'></slot>
+            </div>
+            <footer class="footer">
+              <slot name='btn1' :value='btn1'></slot>
+              <slot name='btn2' :value='btn2'></slot>
+              </footer>
+          </div>
+      `,
+      data() {
+        return {
+          btn1: '啊哈哈',
+          btn2: '😄'
+        }
+      }
+    })
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        msg: 'hello'
+      }
+    })
+  </script>
+</body>
+
+</html>

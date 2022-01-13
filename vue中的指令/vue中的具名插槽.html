@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .modal {
+      width: 300px;
+      padding: 0 10px 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin-bottom: 20px;
+    }
+
+    h3 {
+      margin: 10px 0
+    }
+
+    footer {
+      margin-top: 10px;
+      text-align: right
+    }
+  </style>
+</head>
+
+<!--  * 1,<slot>叫默认插槽，或者具名插槽，它会被组件内部的内容替换掉的，所以一个组件里最好提供一个 -->
+<!--  * 2,具名插槽：给插槽取个名字 <slot name='hh'/>-->
+<!--  * 如果是具名插槽，给具名插槽传内容，内容需要包裹在template标签中，并且加一个v-slot属性，值是插槽名称-->
+
+<body>
+  <div id="app">
+    <modal>
+      <template v-slot:title>
+        <h3>温馨提示</h3>
+      </template>
+      <template v-slot:content>
+        <p>确定删除吗？</p>
+      </template>
+
+    </modal>
+
+    <modal>
+      <template v-slot:title>
+        我是标题
+      </template>
+      <template v-slot:content>
+        <input type="text">
+      </template>
+
+    </modal>
+  </div>
+  <script src="../vue.js"></script>
+  <script>
+    Vue.component('modal', {
+      template: `
+        <div class="modal">
+          <header class='header'>
+            <slot name='title'></slot>
+          </header>
+          <div class="modal-content">
+            <slot name='content'></slot>
+            </div>
+            <footer class="footer">
+              <button>取消</button>
+              <button>确定</button>
+              </footer>
+          </div>
+      `
+    })
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        msg: 'hello'
+      }
+    })
+  </script>
+</body>
+
+</html>
