@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    /* .router-link-exact-active,
+    .router-link-active {
+      font-size: 24px;
+      color: pink
+    } */
+
+    .active {
+      color: green
+    }
+  </style>
+</head>
+<!-- * 让当前激活的导航高亮 -->
+<!-- * 方法1:vue-router会让当前激活的导航有两个类：router-link-exact-active router-link-active，给这两个类加样式 -->
+<!-- * 方法2:在配置规则时修改默认类：linkActiveClass和linkExactActiveClass -->
+
+<!-- * linkActiveClass和linkExactActiveClass  的区别 -->
+<!-- * linkActiveClass：模糊匹配  path:'/'  能够匹配到 '/to'  '/xxx/yyy'-->
+<!-- * 在配置规则时修改默认类：linkActiveClass和linkExactActiveClass :精确匹配-->
+
+<!-- ~ 如果要精确匹配，要么只用linkExactActiveClass，不提供linkActiveClass，要么在router-link上加一个属性：exact-->
+<!-- ~ 用后者的方法好，linkActiveClass和linkExactActiveClass 还是要一起出现比较好-->
+
+<body>
+  <div id="app">
+    <p>{{msg}}</p>
+    <hr>
+    <ul>
+      <li>
+        <router-link to='/' exact>首页</router-link>
+      </li>
+      <li>
+        <router-link to='/user'>用户</router-link>
+      </li>
+      <li>
+        <router-link to='/login'>登录</router-link>
+      </li>
+    </ul>
+
+    <router-view></router-view>
+  </div>
+  <script src="vue.js"></script>
+  <script src="vue-router.js"></script>
+  <script>
+    const Index = {
+      template: `<div>index</div>`
+    }
+
+    const User = {
+      template: `<div>user</div>`
+    }
+
+    const Login = {
+      template: `<div>login</div>`
+    }
+
+    const router = new VueRouter({
+      routes: [
+
+        {
+          path: "/",
+          component: Index
+        },
+        {
+          path: "/user",
+          component: User
+        },
+        {
+          path: "/login",
+          component: Login
+        },
+      ],
+      //!: 方法2，默认是router-link-active
+      linkActiveClass: 'active',
+      //默认是router-link-exact-active
+      linkExactActiveClass: 'active'
+    })
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        msg: 'hello'
+      },
+      router
+    })
+  </script>
+</body>
+
+</html>

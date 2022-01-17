@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+
+
+<body>
+  <div id="app">
+    <p>{{msg}}</p>
+    <hr>
+    <ul>
+      <li>
+        <router-link to='/index'>首页</router-link>
+      </li>
+      <li>
+        <router-link to='/user'>用户</router-link>
+      </li>
+      <li>
+        <router-link to='/login'>登录</router-link>
+      </li>
+    </ul>
+    <router-view></router-view>
+  </div>
+  <script src="vue.js"></script>
+  <script src="vue-router.js"></script>
+  <script>
+
+    const First = {
+      template: `<div>first hhhhhhhh</div>`
+    }
+    const Second = {
+      template: `<div>second</div>`
+    }
+
+
+    const Index = {
+      template: `<div>index</div>`
+    }
+
+    const User = {
+      template: `<div>user
+        <span><router-link to='/user/first'>first</router-link></span>
+        <span><router-link to='/user/second'>second</router-link></span>
+        <hr/>
+        <router-view></router-view>
+        </div>`
+    }
+
+    const Login = {
+      template: `<div>login</div>`
+    }
+
+
+    const router = new VueRouter({
+
+      routes: [
+        {
+          path: "/index",
+          component: Index
+        },
+        {
+          path: "/user",
+          component: User,
+          //!: 配置子路由时，path里面不要加/，它会自动拼接在父路由后面
+          children: [
+            {
+              path: "first",
+              component: First
+            },
+            {
+              path: "second",
+              component: Second
+            },
+          ]
+        },
+        {
+          path: "/login",
+          component: Login
+        },
+      ]
+
+    });
+
+
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        msg: 'hello'
+      },
+      router,
+
+    })
+  </script>
+</body>
+
+
+
+</html>

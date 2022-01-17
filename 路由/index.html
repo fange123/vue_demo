@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<!-- * 路由：是一套映射规则 -->
+<!-- * url中的哈希值（# hash）发生改变,路由会根据开发人员制定好的规则，展示对应的内容（组件）-->
+<!-- * vue中的路由：一个哈希值对应一个组件，哈希值发生改变，对应的组件会跟着渲染）-->
+<!-- * 怎么用：vue-router  (官方提供)-->
+
+<body>
+  <div id="app">
+    <p>{{msg}}</p>
+  </div>
+  <script src="vue.js"></script>
+  <script>
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        msg: 'hello'
+      }
+    })
+  </script>
+</body>
+
+</html>

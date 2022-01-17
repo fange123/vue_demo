@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+
+
+<body>
+  <div id="app">
+    <p>{{msg}}</p>
+    <hr>
+    <!-- !: 设置路由出口 ,匹配到组件的显示位置-->
+    <router-view></router-view>
+  </div>
+  <script src="vue.js"></script>
+  <script src="vue-router.js"></script>
+  <script>
+
+    //一个对象其实就可以是一个组件，但此时的组件是用不了的
+    //方式1:Vue.component('index',Index)全局注册组件
+    //方式2:局部注册组件
+    //方式3:配置到路由规则中
+
+    //!: 2,准备了路由规则中使用到的组件
+
+    const Index = {
+      template: `<div>index</div>`
+    }
+
+    const User = {
+      template: `<div>user</div>`
+    }
+
+    const Login = {
+      template: `<div>login</div>`
+    }
+
+    //!:  配置路由规则
+
+    //!:  路由规则：一个hash对应一个组件
+
+    //router是整个路由对象，一个项目就一个
+    //route：一条路由规则
+    const router = new VueRouter({
+      //多条路由规则：数组
+      //path:路径
+      //component:组件
+      routes: [
+        {
+          path: "/index",
+          component: Index //方式3
+        },
+        {
+          path: "/user",
+          component: User
+        },
+        {
+          path: "/login",
+          component: Login
+        },
+      ]
+
+    });
+
+
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        msg: 'hello'
+      },
+      router,
+      //!: 方式2，局部注册
+      components: {
+        Index
+      }
+    })
+  </script>
+</body>
+
+
+
+</html>
