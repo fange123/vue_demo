@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<!--  *  地址栏的url是通过location.href拿到的 -->
+<!-- file:///Users/zhangdabao/aa.html#/product/2?name='zhy' -->
+<!--  *  this.$route指的是#号后面的那部分内容-->
+<!-- /product/2?name='zhy' -->
+<!--  *  fullPath:#号后面所有内容-->
+<!-- /product/2?name='zhy' -->
+<!--  *  params:匹配到的动态路由的数据，多个也可以拿到{id:1,xx:2}-->
+<!-- {id:1} -->
+<!--  *  query:获取到的是查询字符串的内容  ?后面的内容-->
+<!-- name:'zhy' -->
+<!--  *  path:fullPath除去query剩余的内容-->
+<!-- /product/2 -->
+
+<!-- ? $route可以获取到整个地址栏的路由信息 -->
+
+<body>
+  <div id="app">
+    <p>{{msg}}</p>
+    <hr>
+    <ul>
+      <li>
+        <router-link to='/product/1'>商品1</router-link>
+      </li>
+      <li>
+        <router-link to='/product/2'>商品2</router-link>
+      </li>
+      <li>
+        <router-link to='/product/3'>商品3</router-link>
+      </li>
+      <li>
+        <router-link to='/product/4'>商品4</router-link>
+      </li>
+    </ul>
+    <router-view></router-view>
+  </div>
+  <script src="vue.js"></script>
+  <script src="vue-router.js"></script>
+  <script>
+
+    const Product = {
+      template: `<div>商品{{id}}</div>`,
+    }
+
+    const router = new VueRouter({
+      routes: [
+        {
+          path: '/product/:id', component: Product
+        }
+      ]
+    })
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        msg: 'hello'
+      },
+      router
+    })
+  </script>
+</body>
+
+</html>

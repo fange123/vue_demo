@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <p>{{msg}}</p>
+    <hr>
+    <ul>
+      <li>
+        <router-link to='/product/1'>商品1</router-link>
+      </li>
+      <li>
+        <router-link to='/product/2'>商品2</router-link>
+      </li>
+      <li>
+        <router-link to='/product/3'>商品3</router-link>
+      </li>
+      <li>
+        <router-link to='/product/4'>商品4</router-link>
+      </li>
+    </ul>
+    <router-view></router-view>
+  </div>
+  <script src="vue.js"></script>
+  <script src="vue-router.js"></script>
+  <script>
+
+    const Product = {
+      template: `<div>商品{{id}}</div>`,
+
+      computed: {
+        id() {
+          return this.$route.params.id
+        }
+      },
+      created() {
+        //!: 2,获取动态路由的参数
+
+        //TODO: $router指的是整个项目中的路由对象，一个项目就一个，不会变，基本能用到的地方就是他的push方法实现路由跳转
+
+        //TODO: this.$route指的是当前的路由规则
+
+      }
+    }
+
+    const router = new VueRouter({
+      routes: [
+        //!: 匹配/product/1 /product/2
+        //!: 不匹配/product/1/2  /product
+        //!: 不匹配/product/:id  可以是多层： /product/:a/:b
+
+        //!: 1,设置动态路由匹配
+        {
+          path: '/product/:id', component: Product
+        }
+        // {
+        //   path: '/product/1', component: Product
+        // },
+        // {
+        //   path: '/product/2', component: Product
+        // },
+        // {
+        //   path: '/product/3', component: Product
+        // },
+        // {
+        //   path: '/product/4', component: Product
+        // }
+      ]
+    })
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        msg: 'hello'
+      },
+      router
+    })
+  </script>
+</body>
+
+</html>

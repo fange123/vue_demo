@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .router-link-exact-active,
+    .router-link-active {
+      font-size: 20px;
+      color: pink
+    }
+  </style>
+</head>
+<!-- * 做导航切换路由时就用<router-link/> -->
+<!-- * 做功能跳转是用router.push -->
+
+<body>
+  <div id="app">
+    <p>{{msg}}</p>
+    <hr>
+    <ul>
+      <li>
+        <router-link to='/index'>首页</router-link>
+      </li>
+      <li>
+        <router-link to='/user'>用户</router-link>
+      </li>
+      <li>
+        <router-link to='/login'>登录</router-link>
+      </li>
+    </ul>
+    <router-view></router-view>
+  </div>
+  <script src="vue.js"></script>
+  <script src="vue-router.js"></script>
+  <script>
+
+    const Index = {
+      template: `<div>首页</div>`
+    }
+    const User = {
+      template: `<div>用户
+
+        <hr>
+         <ul>
+      <li>
+        <router-link to='/user/manager'>管理</router-link>
+      </li>
+      <li>
+        <router-link to='/user/info'>信息</router-link>
+      </li>
+
+    </ul>
+
+    <router-view></router-view>
+        </div>`
+    }
+
+    const Manager = {
+      template: `<div>用户管理</div>`
+    }
+    const Info = {
+      template: `<div>用户信息</div>`
+    }
+    //TODO: 声明式导航： <router-link to='/index' > 登录</router-link >
+    // TODO: 编程式导航：<button @click='()=>this.$router.push('/index')'>登录</button>
+    // !:  this.$router 相当于拿到项目唯一的router对象，该对象里面有很多方法，比如push方法
+    const Login = {
+      template: `<div>登录
+        <hr>
+        <router-link to='/index'>登录</router-link>
+        <button @click="()=>this.$router.push('/index')">登录</button>
+        </div>`
+    }
+
+    const router = new VueRouter({
+      routes: [
+        {
+          path: '/', redirect: '/index'
+        },
+        {
+          path: '/index', component: Index
+        },
+        {
+          path: '/user', component: User,
+          children: [
+            {
+              path: 'manager',
+              component: Manager
+            },
+            {
+              path: 'info',
+              component: Info
+            },
+          ]
+        },
+        {
+          path: '/login', component: Login
+        }
+      ]
+    })
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        msg: 'hello'
+      },
+      router
+    })
+  </script>
+</body>
+
+</html>
