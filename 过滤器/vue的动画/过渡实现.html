@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    .v-enter,
+    .zhy-enter {
+      opacity: 0;
+    }
+
+    .v-enter-to,
+    .zhy-enter-to {
+      opacity: 1;
+    }
+
+    .v-enter-active,
+    .zhy-enter-active {
+      transition: opacity 1s
+    }
+
+    .v-leave,
+    .zhy-leave {
+      opacity: 1;
+    }
+
+    .v-leave-to,
+    .zhy-leave-to {
+      opacity: 0;
+    }
+
+    .v-leave-active,
+    .zhy-leave-active {
+      transition: opacity 1s
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <button @click='isShow = !isShow'>点击</button>
+
+    <!-- * vue中提供了transition标签，配合6个类名使用 -->
+    <!-- * 两大类：enter,leave-->
+
+
+    <!-- ? 如果transition没有指定name，那么默认6个类都是v-开头的 -->
+    <transition>
+      <p v-show='isShow'>{{msg}}</p>
+    </transition>
+    <transition name='zhy'>
+      <h1 v-show='isShow'>{{msg}}</h1>
+    </transition>
+    <!-- * 不建议这样写 -->
+
+
+  </div>
+  <script src="vue.js"></script>
+  <script>
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        msg: 'hello',
+        isShow: true
+      },
+      methods: {
+        // fn() {
+        //   //TODO:如果函数里面只有一行逻辑代码，可以简写
+        //   this.isShow = !this.isShow;
+        // }
+      }
+    })
+  </script>
+</body>
+
+</html>
