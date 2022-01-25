@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <!-- * name:demo -->
+    <!-- * value:hello -->
+    <!-- * arg:aa -->
+    <!-- * modifiers:bb,cc ,两个修饰符：bb=true,cc=true，可多个-->
+    <span v-demo:aa.bb.cc='msg'>{{msg}}</span>
+
+  </div>
+  <script src="vue.js"></script>
+  <script>
+
+
+    Vue.directive('demo', {
+      //TODO:所有钩子函数的参数都一样
+      //el:表示指令所在的dom元素
+      //binding:一个对象，有很多属性，包含了指令中的所有信息
+      //name:指令的名字
+      //value:指令的值
+      //arg:指令的参数
+      bind(el, binding) {
+        console.log(el);
+        console.log(binding);
+
+      }
+
+    })
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        msg: 'hello'
+      },
+
+
+    })
+  </script>
+</body>
+
+</html>

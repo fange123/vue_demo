@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <input type="text" autofocus id='input' />
+    <input type="text" autofocus id='input' />
+    <input type="text" autofocus id='input' />
+    <input type="text" autofocus id='input' v-focus1='msg' />
+    <input type="text" autofocus id='input' />
+    <input type="text" autofocus id='input' />
+    <input type="text" autofocus id='input' />
+  </div>
+  <script src="vue.js"></script>
+  <script>
+
+    //!: 全局指令
+
+    Vue.directive('focus', {
+      //写指令的5个钩子函数
+      inserted(el) {
+        //表示指令所在的dom元素插入到页面中 , 参数el代表的就是当前元素，指令加给谁，el就是谁
+      },
+
+    })
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        msg: 'hello'
+      },
+      //!: 局部指令
+      directives: {
+        focus1: {
+          bind() {
+            //bind钩子函数只会执行一次，会在指令绑定到元素上的时候执行，此时元素不一定在页面中显示
+            console.log('bind');
+          },
+          inserted(el) {
+            //表示指令所在的dom元素插入到页面中 , 此时元素已经在页面中显示了
+            el.focus()
+            console.log('inserted');
+
+          },
+          update() {
+            //当指令的值发生改变的时候触发
+            console.log('update');
+          },
+          componentUpdated() {
+            //当前组件所有的dom都更新完成的时候触发
+            console.log('componentUpdated');
+          },
+          unbind() {
+            //当指令从dom元素上移除的时候触发
+            console.log('unbind');
+          }
+        }
+
+      }
+
+    })
+  </script>
+</body>
+
+</html>

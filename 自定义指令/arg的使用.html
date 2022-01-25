@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<!-- * 实现一个my-bind指令 -->
+<!-- * 实现一个v-color指令: -->
+<!-- * v-color:font='color' 设置元素字体颜色-->
+<!-- * v-color:bg='color' 设置元素背景颜色-->
+
+<body>
+  <div id="app">
+    <p>{{msg}}</p>
+    <h1 v-my-bind:title='msg'>哈哈哈</h1>
+    <p v-color:bg='color'>哈哈哈哈哈</p>
+    <p v-color:font='color'>哈哈哈哈哈</p>
+  </div>
+  <script src="vue.js"></script>
+  <script>
+
+    Vue.directive('color', {
+      bind(el, binding) {
+
+        //判断参数是font还是bg
+        if (binding.arg === 'font') {
+          el.style.color = binding.value
+
+        }
+        if (binding.arg === 'bg') {
+          el.style.backgroundColor = binding.value
+
+        }
+      },
+      update(el, binding) {
+
+        //判断参数是font还是bg
+        console.log(binding);
+        if (binding.arg === 'font') {
+          el.style.color = binding.value;
+
+        }
+        if (binding.arg === 'bg') {
+          el.style.backgroundColor = binding.value;
+
+        }
+      }
+    })
+
+    Vue.directive('my-bind', {
+      bind(el, binding) {
+        //把value值设置给title属性
+        el.setAttribute(binding.arg, binding.value)
+
+      },
+      //TODO:一般带值的指令基本上需要update
+      update(el, binding) {
+        el.setAttribute(binding.arg, binding.value)
+      }
+    })
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        msg: 'hello',
+        color: 'green'
+      }
+    })
+  </script>
+</body>
+
+</html>

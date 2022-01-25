@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <p>{{msg}}</p>
+    <a href="http://www.baidu.com" v-on:click.prevent="fn">点我</a>
+    <a href="http://www.baidu.com" v-my-on:click.prevent="fn">点我</a>
+  </div>
+  <script src="vue.js"></script>
+  <script>
+
+    Vue.directive('my-on', {
+      bind(el, binding) {
+        console.log(binding);
+        const { prevent, stop } = binding.modifiers
+        const { arg, value } = binding
+        //!:给el注册事件,el.addEventListener('click', fn)
+        el.addEventListener(arg, function (e) {
+          //一定要确保fn执行，value就是传入的fn
+          value()
+
+          if (prevent) {
+            e.preventDefault()
+          }
+
+          if (stop) {
+            e.stopPropagation()
+          }
+
+        })
+
+      }
+    })
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        msg: 'hello'
+      },
+      methods: {
+        fn() {
+          alert('hello')
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

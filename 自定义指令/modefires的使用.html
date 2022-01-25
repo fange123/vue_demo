@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<!-- * 需求： -->
+<!-- * v-color:bg.italic = 'color'  把元素的字体改成倾斜-->
+<!-- * v-color:bg.bold = 'color'  把元素的字体改成加粗-->
+
+<body>
+  <div id="app">
+    <p>{{msg}}</p>
+    <p v-color:bg.bold='color'>哈哈哈</p>
+    <p v-color:font.bold='color'>哈哈哈</p>
+    <p v-color:bg.italic='color'>哈哈哈</p>
+    <p v-color:font.italic='color'>哈哈哈</p>
+  </div>
+  <script src="vue.js"></script>
+
+  <script>
+    Vue.directive('color', {
+      bind(el, binding) {
+        const { bold, italic } = binding.modifiers
+        const { arg } = binding
+
+        if (arg === 'bg') {
+          el.style.color = binding.value
+
+        }
+        if (arg === 'font') {
+          el.style.backgroundColor = binding.value
+
+        }
+
+        if (bold) {
+          el.style.fontWeight = 'bold'
+        }
+
+        if (italic) {
+          el.style.fontStyle = 'italic'
+        }
+      }
+
+    })
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        msg: 'hello',
+        color: 'green'
+      }
+    })
+  </script>
+</body>
+
+</html>

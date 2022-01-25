@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<!-- * 需求1： v-red:给哪个元素添加，那个元素的字体就变成red -->
+<!-- * 需求2： v-color='color':传什么颜色就改成什么颜色 -->
+
+<body>
+  <div id="app">
+    <p>{{msg}}</p>
+    <span v-red>{{msg}}</span>
+    <h1 v-color='color'>{{msg}}</h1>
+    <p v-text='msg'>text</p>
+  </div>
+  <script src="vue.js"></script>
+  <script>
+
+    Vue.directive('red', {
+      bind(el, binding) {
+        el.style.color = 'red'
+
+      }
+    })
+    Vue.directive('color', {
+      bind(el, binding) {
+
+        const { value: color } = binding
+        el.style.color = color
+
+      },
+      update(el, binding) {
+        const { value: color } = binding
+        el.style.color = color
+      }
+    })
+
+    //TODO:v-text原理
+    Vue.directive('myText', {
+      bind(el, binding) {
+
+        const { value: text } = binding
+        el.innerText = text
+
+      },
+      update(el, binding) {
+        const { value: text } = binding
+        el.innerText = text
+      }
+
+    })
+
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        msg: 'hello',
+        color: 'green'
+      }
+    })
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <!-- * 想要input框获取焦点，vue中直接使用 autofocus是不可以的-->
+    <!-- ?v-focus:使用自定义的focus指令 -->
+    <input type="text" autofocus id='input' v-focus />
+  </div>
+  <script src="vue.js"></script>
+  <script>
+    //!: 1:定义一个指令（全局指令和局部指令）
+    // directive:指令
+    // 参数1:指令名
+    // 参数2:指令的配置项
+    Vue.directive('focus', {
+      //写指令的5个钩子函数
+      inserted(el) {
+        //表示指令所在的dom元素插入到页面中 , 参数el代表的就是当前元素，指令加给谁，el就是谁
+        console.log(el);
+        el.focus();
+      }
+    })
+    //!: 2:使用这个指令
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        msg: 'hello'
+      },
+      mounted() {
+        //使用js语法获取焦点(没有浏览器兼容性)
+        //但是，操作dom了
+        //所以，可以把获取焦点这个操作封装成一个指令
+        // input.focus();
+
+      }
+    })
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <p>{{msg}}</p>
+    <a href="http://www.baidu.com" v-on:click.prevent="fn">点我</a>
+    <a href="http://www.baidu.com" v-my-on:click.prevent="fn">点我</a>
+  </div>
+  <script src="vue.js"></script>
+  <script>
+    //TODO:指令简写，，对象变函数。。
+
+    //!: 如果指令中只需要写bind和update，第二个参数可以写一个函数
+    //!: Vue.directive(名字，函数)，这个函数代表update和bind
+    //!: 如果还需要其他钩子函数，还是要写对象
+    Vue.directive('my-on', function (el, binding) {
+      const { prevent, stop } = binding.modifiers
+      const { arg, value } = binding
+      //!:给el注册事件,el.addEventListener('click', fn)
+      el.addEventListener(arg, function (e) {
+        //一定要确保fn执行，value就是传入的fn
+        value()
+
+        if (prevent) {
+          e.preventDefault()
+        }
+
+        if (stop) {
+          e.stopPropagation()
+        }
+
+      })
+
+    })
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        msg: 'hello'
+      },
+      methods: {
+        fn() {
+          alert('hello')
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
