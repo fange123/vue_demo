@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<!--
+  * 早起的npm安装包的时候，必须--save,简写-S  才会在dependencies中加上记录，否则没用
+  * 在npm5之后，npm默认--save
+
+
+  * --save-dev : -D  :安装的依赖包座位开发阶段的依赖，记录到devDependencies中
+  ~ 举例子：
+  * npm i jquery --save-dev
+  * npm i jquery -D
+  * yarn add jquery -D; yarn 中不识别--save-dev，只识别-D
+  ? 实际上jquery应该存在于dependencies中，因为整个项目都需要依赖
+
+  * dependencies：项目的依赖，webpack打包
+  * devDependencies：项目开发阶段的依赖，项目上线不需要
+
+  * 如果安装的包是开发阶段需要的，都需要加-D
+
+
+ -->
+
+<body>
+  <div id="app">
+    <p>{{msg}}</p>
+  </div>
+  <script src="vue.js"></script>
+  <script>
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        msg: 'hello'
+      }
+    })
+  </script>
+</body>
+
+</html>

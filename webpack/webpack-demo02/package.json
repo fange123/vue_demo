@@ -1,0 +1,20 @@
+{
+  "name": "webpack-demo02",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "css-loader": "^6.6.0",
+    "html-webpack-plugin": "^5.5.0",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.69.1",
+    "webpack-cli": "^4.9.2"
+  },
+  "scripts": {
+    "build": "webpack"
+  },
+  "dependencies": {
+    "jquery": "^3.6.0",
+    "moment": "^2.29.1"
+  }
+}

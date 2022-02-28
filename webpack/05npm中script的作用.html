@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<!--
+
+  ~ 在package.json中可以配置 script:可以配置一些自己的命令
+  * scripts:{"zhy":"yarn add jquery"}
+  ~ 运行方式：npm run zhy
+
+  ~ 特殊命令：start stop  运行的时候可以省略 run
+
+  ~ 如果使用yarn ,不需要加run
+  ~ scripts的作用：可以配置一些命令，简化命令；有更好的可阅读性
+
+
+ -->
+
+<body>
+  <div id="app">
+    <p>{{msg}}</p>
+  </div>
+  <script src="vue.js"></script>
+  <script>
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        msg: 'hello'
+      }
+    })
+  </script>
+</body>
+
+</html>

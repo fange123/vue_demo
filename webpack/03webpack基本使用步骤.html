@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<!-- *
+     * 1.初始化一个项目   yarn init -y  npm init -y
+     * 2.安装依赖包   yarn add webpack webpack-cli;    --save-dev问题
+     * 3.在package.json中配置一条scripts:
+     *  scripts:{"build":"...."}
+     * 4. 运行打包命令：yarn build   npm run build
+
+-->
+
+<body>
+  <div id="app">
+    <p>{{msg}}</p>
+  </div>
+  <script src="vue.js"></script>
+  <script>
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        msg: 'hello'
+      }
+    })
+  </script>
+</body>
+
+</html>
+
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<!-- * webpack是一个js应用程序的静态模块打包器 -->
+
+<!-- * 功能 -->
+<!-- * 1，语法转换  less/sass/stylus ----> css 浏览器只认识css,转成css -->
+<!-- *    ES6(ES10) 转成 ES5（ES3）-->
+<!-- *    typescript 转成 javascript-->
+
+<!-- * 2，文件（html,css,js）的压缩合并（打包） -->
+<!-- * 3，为开发提供了一个服务器环境 -->
+<!-- *    >，自动打开浏览器 -->
+<!-- *    >，监视文件的变化-->
+<!-- *    >，自动刷新浏览器-->
+
+
+<!-- * 4，开发的项目一般不会直接上线，需要webpack打包，打包完之后上线 -->
+<!-- *   webpack是开发时用的，上线后不用 -->
+
+<body>
+  <div id="app">
+    <p>{{msg}}</p>
+  </div>
+  <script src="vue.js"></script>
+  <script>
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        msg: 'hello'
+      }
+    })
+  </script>
+</body>
+
+</html>
