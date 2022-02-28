@@ -1,6 +1,7 @@
 require("./a.js");
 //导入样式
 require("./css/base.css");
+require("./less/index.less");
 
 //引入jquery来实现各行换色
 const $ = require("jquery");

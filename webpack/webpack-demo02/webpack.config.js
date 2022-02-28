@@ -32,6 +32,11 @@ module.exports = {
         test: /\.css$/, //正则表达式 匹配所有.css结尾的文件
         use: ["style-loader", "css-loader"], //顺序从右到左，css处理css文件，style使样式生效
       },
+      //配置less
+      {
+        test: /\.less$/, //正则表达式 匹配所有.css结尾的文件
+        use: ["style-loader", "css-loader", "less-loader"], //顺序从右到左，css处理css文件，style使样式生效
+      },
     ],
   },
 };
