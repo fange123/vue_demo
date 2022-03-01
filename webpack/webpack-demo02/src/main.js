@@ -3,6 +3,9 @@ require("./a.js");
 require("./css/base.css");
 require("./less/index.less");
 
+//导入字体图标的css文件
+require("./fonts/iconfont.css");
+
 //引入jquery来实现各行换色
 const $ = require("jquery");
 const moment = require("moment");

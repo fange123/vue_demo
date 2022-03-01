@@ -1,0 +1,30 @@
+{
+  "id": "3211625",
+  "name": "we b pa c k",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "20384624",
+      "name": "cherry",
+      "font_class": "cherry",
+      "unicode": "ecc0",
+      "unicode_decimal": 60608
+    },
+    {
+      "icon_id": "20384651",
+      "name": "pineapple",
+      "font_class": "pineapple",
+      "unicode": "ecc1",
+      "unicode_decimal": 60609
+    },
+    {
+      "icon_id": "20384652",
+      "name": "blueberry",
+      "font_class": "blueberry",
+      "unicode": "ecc2",
+      "unicode_decimal": 60610
+    }
+  ]
+}

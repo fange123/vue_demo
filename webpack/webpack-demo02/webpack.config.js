@@ -68,6 +68,18 @@ module.exports = {
           publicPath: "./",
         },
       },
+      //处理字体图标
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/,
+        type: "asset", // (webpack 5)
+        // (webpack 4)
+        // loader: 'file-loader',
+      },
+      //处理音视频
+      {
+        test: /\.(mp3|wma|wav|avi|wmv|mpeg|mp4|m4v)$/,
+        type: "asset",
+      },
     ],
   },
 };
