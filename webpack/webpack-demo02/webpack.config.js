@@ -37,6 +37,37 @@ module.exports = {
         test: /\.less$/, //正则表达式 匹配所有.css结尾的文件
         use: ["style-loader", "css-loader", "less-loader"], //顺序从右到左，css处理css文件，style使样式生效
       },
+      //TODO:配置处理图片的规则  webpack5失效
+      // {
+      //   test: /\.(png|jpe?g|gif)$/,
+      //   use: [
+      //     {
+      //       loader: "url-loader",
+      //       options: {
+      //         //如果图片小于30kb，会转成base64
+      //         //如果图片大于30kb，会交给file-loader处理
+      //         limit: 30 * 1024,
+      //       },
+      //     },
+      //   ],
+      // },
+      //TODO: webpack5 处理图片打包规则
+
+      {
+        // 处理图片资源
+        test: /\.(png|jpe?g|gif)$/,
+        //*  webpack5中使用assets-module（url-loader已废弃）
+        type: "asset",
+        parser: {
+          dataUrlCondition: {
+            maxSize: 30 * 1024,
+          },
+        },
+        generator: {
+          filename: "img/[name].[hash:6][ext]",
+          publicPath: "./",
+        },
+      },
     ],
   },
 };
