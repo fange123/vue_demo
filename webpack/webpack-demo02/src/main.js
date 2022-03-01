@@ -16,3 +16,7 @@ $(function () {
   //改最后一行li的文本为当前时间
   $("li:last").text(moment().format("YYYY-MM-DD HH:mm:ss"));
 });
+
+const fn = () => {
+  console.log("=00900--");
+};

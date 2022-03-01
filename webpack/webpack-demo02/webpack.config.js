@@ -80,6 +80,14 @@ module.exports = {
         test: /\.(mp3|wma|wav|avi|wmv|mpeg|mp4|m4v)$/,
         type: "asset",
       },
+
+      //配置babel处理规则（es6语法转js语法）
+
+      {
+        test: /\.(js)$/,
+        exclude: /node_modules/,
+        loader: "babel-loader",
+      },
     ],
   },
 };
