@@ -90,4 +90,10 @@ module.exports = {
       },
     ],
   },
+  //webpack-dev-server的配置
+  devServer: {
+    open: true, //允许打开浏览器
+    port: 3000,
+    hot: true, //热更新
+  },
 };
