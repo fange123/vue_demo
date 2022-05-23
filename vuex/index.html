@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+
+</head>
+
+<body>
+  <div id="app">
+    <h1>{{$store.state.msg}}</h1>
+    <button @click="change">修改</button>
+    <h1>{{$store.state.count}}</h1>
+    <button @click="add">加1</button>
+  </div>
+  <!-- !:一定要注意vue和vuex的搭配版本 -->
+
+  <!-- TODO:Vuex 是一个专为 Vue.js 应用程序开发的状态管理模式 + 库。它采用集中式存储管理应用的所有组件的状态，并以相应的规则保证状态以一种可预测的方式发生变化。 -->
+  <!-- 1.引入文件 -->
+  <script src="./vue.js"></script>
+  <script src="./vuex.js"></script>
+  <script>
+    // 2.创建一个vuex对象
+    const store = new Vuex.Store({
+      //state:状态。相当于组件中的data,只不过它的数据是共享的
+      state: {
+        msg: '你好',
+        count: 10
+
+      },
+      // 改状态
+      mutations: {
+        //写方法，你要操作啥、
+        changeMsg(state, payload) {
+          state.msg = payload
+        },
+        add(state) {
+          state.count++
+        }
+      },
+      strict: true//开发环境用
+    })
+
+    const vm = new Vue({
+      el: '#app',
+      //3. 关联vm和store
+      // 所有组件中都可以通过this.$store访问到vuex对象
+      store: store,
+
+      data: {
+        msg: ' hello'
+      },
+      methods: {
+        change() {
+          // TODO:不能直接修改store中的值，需要store提供的方法去修改（方法都在mutations中）
+          //提交一个mutation
+          //要传入参数，直接写第二个参数，传多个就写个对象
+          this.$store.commit('changeMsg', '略略略')
+        },
+        add() {
+          this.$store.commit('add')
+        }
+      }
+    })
+  </script>
+
+</body>
+
+</html>
